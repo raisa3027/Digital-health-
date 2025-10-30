@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediLink</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Heritage Pro (local). Put file at: /fonts/HeritagePro-Regular.otf -->
+  <style>
+    @font-face{
+      font-family: 'Heritage Pro';
+      src: url('fonts/HeritagePro-Regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* Bigger, consistent typography */
+    html { font-size: 18px; }           /* base up from 16px -> 18px */
+    body {
+      font-family: 'Heritage Pro', serif;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body class="bg-[#E6F3F7] text-gray-800">
+
+  <!-- Header / Slim Navbar -->
+  <header class="bg-[#BCE0EA]">
+    <div class="max-w-7xl mx-auto px-6 py-2">
+      <div class="flex items-center justify-between">
+        <!-- Left: Logo -->
+        <div class="flex items-center gap-3 h-12">
+          <div class="flex items-center h-full">
+            <img src="img/logo3.png" alt="MediLink Logo" class="h-full w-auto object-contain" />
+          </div>
+        </div>
+
+        <!-- Center: Nav links -->
+        <nav class="hidden md:flex items-center gap-8 font-medium text-base">
+          <a href="#" class="hover:underline underline-offset-4">About</a>
+          <a href="#" class="hover:underline underline-offset-4">Privacy &amp; Policy</a>
+          <a href="#" class="hover:underline underline-offset-4">Diagnostic</a>
+          <a href="#" class="hover:underline underline-offset-4">Doctors</a>
+        </nav>
+
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3">
+          <button class="px-4 py-2 rounded-md border border-blue-700 text-blue-700 bg-white/60 hover:bg-white transition text-base">
+            Log in
+          </button>
+          <button class="px-4 py-2 rounded-md bg-blue-700 text-white hover:bg-blue-800 transition text-base">
+            Register
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="h-px w-full bg-black/20"></div>
+  </header>
+
+  <!-- Hero / Bigger (you'll edit heading later if you want) -->
+  <!-- Hero (DocTime-like compact) -->
+<!-- Hero section: full background image with text overlay -->
+<section class="relative w-full rounded-2xl overflow-hidden shadow-md max-w-7xl mx-auto my-10">
+  <!-- Background image -->
+  <img src="img/landing.jpg" alt="Hero Image"
+       class="w-full h-[420px] md:h-[480px] object-cover object-center brightness-90" />
+
+  <!-- Overlay gradient (optional for readability) -->
+  <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"></div>
+
+  <!-- Text and search overlay -->
+  <div class="absolute inset-0 flex flex-col justify-center items-start px-8 md:px-16 space-y-5 text-white">
+    <h2 class="text-3xl md:text-5xl font-semibold leading-tight drop-shadow-md">
+      Doctors and Medical record<br class="hidden md:block"/> just a Click away!
+    </h2>
+    <p class="text-base md:text-lg max-w-xl text-gray-100 drop-shadow-sm">
+      Say goodbye to manual, reports endless calls and long queues.
+    </p>
+
+    <!-- Search bar -->
+    <div class="relative w-full max-w-md">
+      <input
+        type="text"
+        placeholder="Search Doctor name / Hospital"
+        class="w-full h-12 pl-5 pr-12 rounded-full border border-gray-200 bg-white/90
+               text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <button class="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Quick Access -->
+  <section class="max-w-7xl mx-auto px-6 py-12 text-center">
+    <h3 class="text-3xl font-semibold mb-1">Quick Access</h3>
+    <p class="text-gray-600 mb-8 text-base">Choose a service to get started</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div id="viewRecord"
+           class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-black/5">
+        <div class="mx-auto mb-4 w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+          </svg>
+        </div>
+        <h4 class="font-semibold text-xl">View health record</h4>
+        <p class="text-gray-600 text-base">Access your prescriptions and reports in one place</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div id="doctorAppointment"
+           class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-black/5">
+        <div class="mx-auto mb-4 w-12 h-12 rounded-xl bg-pink-100 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-pink-600">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8 7V3m8 4V3m-9 4h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z" />
+          </svg>
+        </div>
+        <h4 class="font-semibold text-xl">Doctor’s Appointment</h4>
+        <p class="text-gray-600 text-base">Schedule your next appointment</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div id="bookLab"
+           class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-black/5">
+        <div class="mx-auto mb-4 w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-600">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="font-semibold text-xl">Book Lab Test</h4>
+        <p class="text-gray-600 text-base">Reserve diagnostic tests and get reports online</p>
+      </div>
+    </div>
+  </section>
+  <!-- About / Promo section -->
+<section class="bg-[#E6F3F7]">
+  <div class="max-w-7xl mx-auto px-6 py-12 my-10 rounded-2xl grid md:grid-cols-12 gap-8 items-center">
+    <!-- Left: image -->
+    <div class="md:col-span-5">
+      <img src="img/about.jpeg" alt="Family healthcare" class="w-full h-64 md:h-72 lg:h-80 object-cover rounded-xl shadow" />
+    </div>
+
+    <!-- Right: content -->
+    <div class="md:col-span-7">
+     
+      <h3 class="text-2xl font-semibold mb-1">
+      About us
+      </h3>
+      <p class="text-gray-700 mt-3 max-w-2xl">
+     MediLink is a comprehensive digital healthcare platform that connects patients, doctors, and healthcare institutions through a secure, unified system. Our mission is to make healthcare faster, smarter, and more accessible for everyone, regardless of location.
+
+We simplify the challenges of managing health records, finding specialists, and scheduling appointments by offering an integrated platform that brings patients, hospitals, and diagnostic centers together. With MediLink, users can easily book appointments, access prescriptions, and view diagnostic reports anytime, anywhere.
+
+MediLink upholds the highest standards of data privacy and security, using encrypted systems and trusted cloud technology to safeguard every record. Beyond convenience, we empower patients and professionals with seamless communication, better coordination, and reliable digital tools for improved healthcare delivery.
+
+At MediLink, we are redefining digital healthcare through trust, transparency, and continuous care—because your health deserves innovation and attention, every step of the way.
+    </div>
+  </div>
+</section>
+
+
+  <!-- Why choose -->
+  <section class="max-w-7xl mx-auto px-6 py-10 text-center">
+    <h3 class="text-2xl font-semibold mb-1">
+      Why choose <span class="text-blue-700">MediLink</span>
+    </h3>
+    <p class="text-gray-600 mb-8 text-base">Comprehensive healthcare management for everyone</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="space-y-2">
+        <div class="w-8 h-8 mx-auto rounded-full bg-blue-100 flex items-center justify-center">🛡️</div>
+        <h4 class="font-semibold text-xl">Secure & Private</h4>
+        <p class="text-gray-600 text-base">Your health data is encrypted and<br/>protected with industry-standard security</p>
+      </div>
+      <div class="space-y-2">
+        <div class="w-8 h-8 mx-auto rounded-full bg-blue-100 flex items-center justify-center">🕒</div>
+        <h4 class="font-semibold text-xl">24/7 Access</h4>
+        <p class="text-gray-600 text-base">Access your health<br/>records anytime from any device</p>
+      </div>
+      <div class="space-y-2">
+        <div class="w-8 h-8 mx-auto rounded-full bg-blue-100 flex items-center justify-center">💓</div>
+        <h4 class="font-semibold text-xl">Connected Care</h4>
+        <p class="text-gray-600 text-base">Seamless coordination<br/>between patients, doctors, and labs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Footer (Redesigned) -->
+<footer class="bg-[#BCE0EA] text-gray-800">
+<div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+
+
+    <!-- Brand Section -->
+    <div>   
+      <div class="flex items-center gap-3 mb-3">
+        <img src="img/logo.png" alt="MediLink Logo" class="h-15 w-20 " />
+        <h4 class="text-2xl font-semibold tracking-wide"></h4>
+      </div>
+      <p class="text-sm leading-relaxed text-gray-700">
+        Your trusted partner in digital healthcare management.<br/>
+        Empowering patients, doctors, and clinics with smarter health solutions.
+      </p>
+    </div>
+
+    <!-- Services -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3 border-b border-gray-300 pb-1 w-fit">Services</h4>
+      <ul class="space-y-2 text-gray-700 text-[15px]">
+        <li class="hover:text-blue-700 transition">Book Appointments</li>
+        <li class="hover:text-blue-700 transition">View Health Records</li>
+        <li class="hover:text-blue-700 transition">Diagnostic Tests</li>
+        <li class="hover:text-blue-700 transition">Online Consultations</li>
+      </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3 border-b border-gray-300 pb-1 w-fit">Quick Links</h4>
+      <ul class="space-y-2 text-gray-700 text-[15px]">
+        <li class="hover:text-blue-700 transition">About Us</li>
+        <li class="hover:text-blue-700 transition">Privacy & Policy</li>
+        <li class="hover:text-blue-700 transition">FAQs</li>
+        <li class="hover:text-blue-700 transition">Contact Support</li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3 border-b border-gray-300 pb-1 w-fit">Contact Us</h4>
+      <p class="text-[15px] mb-2">📞 +9 23746123133</p>
+      <p class="text-[15px] mb-4">✉️ support@medilink.com</p>
+      <div class="flex space-x-4">
+        <a href="#" class="w-9 h-9 bg-white flex items-center justify-center rounded-full shadow hover:bg-blue-100 transition">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-4 h-4" alt="Facebook" />
+        </a>
+        <a href="#" class="w-9 h-9 bg-white flex items-center justify-center rounded-full shadow hover:bg-blue-100 transition">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" class="w-4 h-4" alt="LinkedIn" />
+        </a>
+        <a href="#" class="w-9 h-9 bg-white flex items-center justify-center rounded-full shadow hover:bg-blue-100 transition">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="w-4 h-4" alt="Instagram" />
+        </a>
+      </div>
+      <p class="text-sm mt-3 text-gray-700">Available 24/7</p>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-gray-300 mt-8">
+    <p class="text-center text-sm py-4 text-gray-700">
+      © 2025 <span class="font-semibold text-blue-700">MediLink</span>. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+  <!-- JS: click handlers -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const go = (msg, url) => { if (url) location.href = url; else alert(msg); };
+      document.getElementById("viewRecord").addEventListener("click", () => go("Opening Health Record...", ""));
+      document.getElementById("doctorAppointment").addEventListener("click", () => go("Booking Doctor Appointment...", ""));
+      document.getElementById("bookLab").addEventListener("click", () => go("Booking Lab Test...", ""));
+    });
+  </script>
+</body>
+</html>
