@@ -4,64 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MediLink | Patient Login</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Tai+Heritage+Pro:wght@400;700&display=swap" rel="stylesheet">
+
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h2 { font-family: 'Poppins', sans-serif; }
+  </style>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#ADDAEA] to-white" style="font-family: 'Tai Heritage Pro', serif;">
 
   <div>
     <!-- Logo -->
-    <div>
-      <img src="img/" alt="MediLink Logo" class="mx-auto w-25 h-24">
+    <div class="mb-4">
+      <img src="img/logo.png" alt="MediLink Logo" class="mx-auto w-32 h-auto"> 
     </div>
 
     <!-- Login Card -->
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-10">
 
-      <div class="text-center mb-6">
-        <h4 class="text-2xl font-bold text-blue-600">MediLink</h4>
-        <p class="text-gray-500 text-sm">Sign in to access your account</p>
+      <div class="text-center mb-8">
+        <h4 class="text-3xl font-bold text-blue-600">MediLink</h4>
+        <p class="text-gray-500 text-base">Sign in to access your account</p>
       </div>
 
       <!-- Login Form -->
-      <form id="loginForm" class="space-y-4">
+      <form id="loginForm" class="space-y-6">
 
         <!-- Email -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Email Address</label>
-          <input type="email" id="email" placeholder="example@gmail.com" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+          <label class="block text-base font-medium text-gray-700">Email Address</label>
+          <input type="email" id="email" placeholder="example@gmail.com"
+            class="w-full mt-2 p-3 border rounded-lg text-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
         </div>
 
         <!-- Password -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+          <label class="block text-base font-medium text-gray-700">Password</label>
+          <input type="password" id="password" placeholder="Enter your password"
+            class="w-full mt-2 p-3 border rounded-lg text-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
         </div>
 
-        <!-- Remember Me + Forgot Password -->
+        <!-- Remember + Forgot -->
         <div class="flex items-center justify-between text-sm">
           <label class="flex items-center gap-2">
             <input type="checkbox" id="remember" class="accent-blue-500">
-            Remember me
+            <span class="text-base">Remember me</span>
           </label>
-          <a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+          <a href="#" class="text-blue-600 hover:underline text-base">Forgot password?</a>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition">
+        <button type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg rounded-lg font-semibold transition">
           Sign In
         </button>
       </form>
 
       <!-- Footer -->
-      <p class="text-center text-sm mt-4 text-gray-600">
-        Don’t have an account? <a href="register.html" class="text-blue-600 hover:underline">Create Account</a>
+      <p class="text-center text-base mt-6 text-gray-600">
+        Don’t have an account?
+        <a href="medilinkregister.html" class="text-blue-600 hover:underline font-medium">Create Account</a>
       </p>
 
       <div class="text-center mt-4">
-        <a href="#" class="text-xs text-gray-500 hover:underline">← Back to Home</a>
+        <a href="#" class="text-sm text-gray-500 hover:underline">← Back to Home</a>
       </div>
 
     </div>
@@ -70,10 +81,8 @@
   <!-- Validation Script -->
   <script>
     const loginForm = document.getElementById('loginForm');
-
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
 

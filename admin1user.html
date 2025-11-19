@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediLink | Manage Users</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tai+Heritage+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+   <style>
+    body { font-family: 'Inter', sans-serif; }
+    h2 { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#E6F3F7] min-h-screen text-gray-800">
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-white w-64 p-6 flex flex-col gap-4 border-r border-blue-100">
+      <!-- Logo at top -->
+      <div class="flex items-center justify-center mb-6">
+        <img src="img/logo3.png" alt="MediLink Logo" class="h-12 w-auto object-contain" />
+      </div>
+
+
+      <!-- Sidebar Menu -->
+      <nav class="flex flex-col gap-2">
+        <a href="admin0dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition" id="link-overview">Overview</a>
+        <a href="admin1user.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-100 text-blue-700 font-semibold" id="link-manage-users">Manage Users</a>
+        <a href="admin2doctor.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition" id="link-manage-doctors">Manage Doctors</a>
+        <a href="admin3appoin.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Appointments</a>
+        <a href="admin4report.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Reports</a>
+        <a href="admin5sysLog.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">System Logs</a>
+      </nav>
+
+      <div class="mt-auto text-xs text-gray-400">&copy; 2025 MediLink</div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-8 py-6 relative">
+    <!-- 🔹 Top Navbar -->
+      <header class="absolute top-0 right-0 left-0 bg-white px-10 py-4 flex items-center justify-end border-b border-blue-100 shadow-sm">
+        <div class="flex items-center gap-4">
+          <div class="flex flex-col text-right">
+            <span class="font-semibold text-gray-700">User Admin</span>
+            <span class="text-sm text-gray-500">Admin</span>
+          </div>
+          <div class="rounded-full bg-blue-200 flex items-center justify-center w-10 h-10 text-blue-700 text-lg font-bold">
+            A
+          </div>
+          <button class="px-4 py-2 border border-blue-700 text-blue-700 rounded hover:bg-blue-50 transition">
+            Logout
+          </button>
+        </div>
+      </header>
+
+      <h2 class="text-2xl font-bold text-blue-700 mb-6 mt-16" id="panel-title">Patient Management</h2>
+
+      <!-- Table Section -->
+      <div class="bg-white rounded-xl shadow border border-blue-100 p-6 overflow-x-auto">
+        <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-4 gap-3">
+          <input id="searchInput" type="text" placeholder="Search..." class="border border-blue-100 px-3 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-200 text-sm bg-[#E6F3F7] placeholder:text-gray-400" oninput="filterUsers()">
+        </div>
+
+        <table class="min-w-full text-left text-[15px]" id="userTable">
+          <thead class="border-b-2 border-blue-100">
+            <tr>
+              <th class="py-2 pl-2">USER</th>
+              <th class="py-2">ROLE</th>
+              <th class="py-2">EMAIL</th>
+              <th class="py-2">PHONE</th>
+              <th class="py-2 pr-2">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Patient Rows -->
+            <tr class="border-b border-blue-50 hover:bg-blue-50/60 user-row" data-role="Patient">
+              <td class="py-2 pl-2 flex items-center gap-3">
+                <span class="bg-blue-600 text-white font-semibold rounded-full w-8 h-8 flex items-center justify-center">J</span>
+                <div>
+                  <div class="font-medium text-gray-700">John Doe</div>
+                </div>
+              </td>
+              <td><span class="bg-blue-50 text-blue-700 rounded px-2 py-1 text-xs font-semibold">Patient</span></td>
+              <td class="text-sm text-gray-600">john.doe@email.com</td>
+              <td class="text-sm text-gray-600">+1 234 567 890</td>
+              <td class="pr-2 flex gap-2">
+                <button class="px-4 py-1 rounded border-2 border-blue-600 text-blue-700 font-medium transition hover:bg-blue-50">View</button>
+                <button class="px-4 py-1 rounded bg-red-600 text-white font-medium hover:bg-red-700 transition">Deactivate</button>
+              </td>
+            </tr>
+
+            <tr class="border-b border-blue-50 hover:bg-blue-50/60 user-row" data-role="Patient">
+              <td class="py-2 pl-2 flex items-center gap-3">
+                <span class="bg-blue-600 text-white font-semibold rounded-full w-8 h-8 flex items-center justify-center">E</span>
+                <div>
+                  <div class="font-medium text-gray-700">Emily Davis</div>
+                </div>
+              </td>
+              <td><span class="bg-blue-50 text-blue-700 rounded px-2 py-1 text-xs font-semibold">Patient</span></td>
+              <td class="text-sm text-gray-600">emily.d@email.com</td>
+              <td class="text-sm text-gray-600">+1 987 654 321</td>
+              <td class="pr-2 flex gap-2">
+                <button class="px-4 py-1 rounded border-2 border-blue-600 text-blue-700 font-medium transition hover:bg-blue-50">View</button>
+                <button class="px-4 py-1 rounded bg-red-600 text-white font-medium hover:bg-red-700 transition">Deactivate</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const panelTitle = document.getElementById('panel-title');
+    const linkDoctors = document.getElementById('link-manage-doctors');
+    const userRows = document.querySelectorAll('.user-row');
+
+    // For switching to patient or doctor views if extended later
+    function showPatients() {
+      panelTitle.textContent = "Patient Management";
+      userRows.forEach(row => {
+        row.style.display = row.getAttribute('data-role') === 'Patient' ? '' : 'none';
+      });
+    }
+
+    function showDoctors() {
+      panelTitle.textContent = "Doctor Management";
+      userRows.forEach(row => {
+        row.style.display = row.getAttribute('data-role') === 'Doctor' ? '' : 'none';
+      });
+    }
+
+    // Default view: patients
+    showPatients();
+
+    // Search/filter users
+    function filterUsers() {
+      var input = document.getElementById('searchInput').value.toLowerCase();
+      var rows = document.querySelectorAll('#userTable tbody tr');
+      rows.forEach(row => {
+        var name = row.querySelector('.font-medium').textContent.toLowerCase();
+        var email = row.querySelectorAll('td')[2].textContent.toLowerCase();
+        var show = true;
+        if (input && !(name.includes(input) || email.includes(input))) show = false;
+        row.style.display = show ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

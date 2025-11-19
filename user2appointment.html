@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediLink | Appointments</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#E6F3F7] font-['Inter'] text-gray-800">
+
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="bg-white w-64 p-6 flex flex-col gap-4 border-r border-blue-100">
+    <div class="flex items-center justify-center mb-6">
+      <img src="img/logo3.png" alt="MediLink Logo" class="h-12 w-auto object-contain" />
+    </div>
+
+    <nav class="flex flex-col gap-2">
+      <a href="user0dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Profile</a>
+      <a href="user1record.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Health Records</a>
+      <a href="user2appointment.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-100 text-blue-700 font-semibold">Appointments</a>
+      <a href="user3diagnostic.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Diagnostic Tests</a>
+    </nav>
+
+    <div class="mt-auto text-xs text-gray-400 text-center border-t border-blue-50 pt-4">
+      © 2025 MediLink
+    </div>
+  </aside>
+
+  <main class="flex-1 px-10 pt-24 pb-8 relative">
+    <header class="absolute top-0 right-0 left-0 bg-white px-10 py-4 flex items-center justify-end border-b border-blue-100 shadow-sm">
+      <div class="flex items-center gap-4">
+        <div class="flex flex-col text-right">
+          <span class="font-semibold text-gray-700">Raisa Tasnim</span>
+          <span class="text-sm text-gray-500">User</span>
+        </div>
+        <div class="rounded-full bg-blue-200 flex items-center justify-center w-10 h-10 text-blue-700 text-lg font-bold">
+          R
+        </div>
+        <button class="px-4 py-2 border border-blue-700 text-blue-700 rounded hover:bg-blue-50 transition">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-blue-700">Appointments</h2>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+      <input type="text" id="searchInput" placeholder="Search by doctor name" class="flex-1 px-4 py-3 border border-blue-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 text-base"/>
+      <select id="filterSelect" class="px-4 py-3 border border-blue-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 text-base">
+        <option value="all">All Specializations</option>
+        <option value="Cardiologist">Cardiologist</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Orthopedic">Orthopedic</option>
+        <option value="Neurologist">Neurologist</option>
+      </select>
+    </div>
+
+    <!-- Appointments Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="doctorsGrid"></div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 hidden items-center justify-center bg-black/40 z-50">
+      <div class="bg-white rounded-2xl w-full max-w-lg p-6 relative">
+        <h3 class="text-lg font-semibold text-blue-700 mb-3">Book Appointment</h3>
+        <form id="bookingForm" class="space-y-4">
+          <input type="hidden" id="doctorNameHidden" name="doctorName" />
+          <div>
+            <label class="block text-xs text-gray-500 mb-1">Doctor</label>
+            <input id="doctorDisplay" readonly class="w-full px-3 py-2 rounded-lg border border-blue-100 bg-blue-50 text-gray-700" />
+          </div>
+
+          <div>
+            <label for="patientName" class="block text-xs text-gray-500 mb-1">Your name</label>
+            <input id="patientName" name="patientName" required class="w-full px-3 py-2 rounded-lg border border-blue-100 focus:ring-2 focus:ring-blue-200" />
+          </div>
+
+          <div>
+            <label for="patientContact" class="block text-xs text-gray-500 mb-1">Contact (phone / email)</label>
+            <input id="patientContact" name="patientContact" required class="w-full px-3 py-2 rounded-lg border border-blue-100 focus:ring-2 focus:ring-blue-200" />
+          </div>
+
+          <div>
+            <label for="apptDay" class="block text-xs text-gray-500 mb-1">Choose Day</label>
+            <select id="apptDay" name="apptDay" required class="w-full px-3 py-2 rounded-lg border border-blue-100 focus:ring-2 focus:ring-blue-200"></select>
+          </div>
+
+          <div>
+            <label for="reason" class="block text-xs text-gray-500 mb-1">Reason / Notes (optional)</label>
+            <textarea id="reason" name="reason" rows="3" class="w-full px-3 py-2 rounded-lg border border-blue-100"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="text-sm text-gray-600">Fee: <span id="feeDisplay" class="font-semibold text-blue-700"></span></div>
+            <div class="flex gap-2">
+              <button type="button" id="closeModal" class="px-4 py-2 rounded-lg border border-blue-200 text-gray-700 hover:bg-blue-50">Cancel</button>
+              <button type="submit" id="confirmBooking" class="px-4 py-2 rounded-lg bg-blue-700 text-white hover:bg-blue-600">Confirm</button>
+            </div>
+          </div>
+          <div id="bookingError" class="text-sm text-red-600 hidden"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const doctors = [
+  {name: "Dr. Rahim Hossain", specialization: "Cardiologist", experience: "10 years", qualification: "MBBS, MD Cardiology", available: "Mon, Wed, Fri | 10:00 AM - 2:00 PM", initials: "RH", fee: "1500", days: ["Mon","Wed","Fri"], time: "10:00 AM - 2:00 PM"},
+  {name: "Dr. Ayesha Samad", specialization: "Dermatologist", experience: "8 years", qualification: "MBBS, Dermatology", available: "Tue, Thu | 12:00 PM - 4:00 PM", initials: "AS", fee: "1200", days: ["Tue","Thu"], time: "12:00 PM - 4:00 PM"},
+  {name: "Dr. Miraj Rahman", specialization: "Orthopedic", experience: "12 years", qualification: "MBBS, MS Orthopedics", available: "Mon, Wed, Sat | 09:00 AM - 1:00 PM", initials: "MR", fee: "1800", days: ["Mon","Wed","Sat"], time: "09:00 AM - 1:00 PM"},
+  {name: "Dr. Nadia Karim", specialization: "Neurologist", experience: "9 years", qualification: "MBBS, MD Neurology", available: "Tue, Thu | 11:00 AM - 3:00 PM", initials: "NK", fee: "2000", days: ["Tue","Thu"], time: "11:00 AM - 3:00 PM"},
+  {name: "Dr. Sarah Mim", specialization: "Dermatologist", experience: "7 years", qualification: "MBBS, Dermatology", available: "Mon, Wed | 01:00 PM - 5:00 PM", initials: "SM", fee: "1100", days: ["Mon","Wed"], time: "01:00 PM - 5:00 PM"}
+];
+
+const doctorsGrid = document.getElementById("doctorsGrid");
+const searchInput = document.getElementById("searchInput");
+const filterSelect = document.getElementById("filterSelect");
+
+// Booking modal elements
+const bookingModal = document.getElementById('bookingModal');
+const doctorDisplay = document.getElementById('doctorDisplay');
+const doctorNameHidden = document.getElementById('doctorNameHidden');
+const feeDisplay = document.getElementById('feeDisplay');
+const apptDay = document.getElementById('apptDay');
+const patientName = document.getElementById('patientName');
+const patientContact = document.getElementById('patientContact');
+const reasonInput = document.getElementById('reason');
+const bookingForm = document.getElementById('bookingForm');
+const bookingError = document.getElementById('bookingError');
+const closeModalBtn = document.getElementById('closeModal');
+
+const appointments = [];
+
+function openBookingModal(doc) {
+  doctorDisplay.value = doc.name;
+  doctorNameHidden.value = doc.name;
+  feeDisplay.textContent = doc.fee + " BDT";
+  bookingError.classList.add('hidden');
+  patientName.value = "";
+  patientContact.value = "";
+  reasonInput.value = "";
+
+  // populate day options
+  apptDay.innerHTML = "";
+  const today = new Date();
+  doc.days.forEach(d => {
+    const option = document.createElement('option');
+    option.value = d;
+    option.textContent = d + " (" + doc.time + ")";
+    apptDay.appendChild(option);
+  });
+
+  bookingModal.classList.remove('hidden');
+  bookingModal.classList.add('flex');
+}
+
+function closeBookingModal() {
+  bookingModal.classList.remove('flex');
+  bookingModal.classList.add('hidden');
+}
+
+function validateBooking(data) {
+  if(!data.patientName.trim()) return "Please enter your name.";
+  if(!data.patientContact.trim()) return "Please enter contact information.";
+  if(!data.apptDay) return "Please choose a day.";
+  return null;
+}
+
+function showToast(message, ok = true) {
+  const el = document.createElement('div');
+  el.textContent = message;
+  el.className = `fixed right-4 bottom-6 px-4 py-2 rounded shadow ${ok ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`;
+  document.body.appendChild(el);
+  setTimeout(()=> el.remove(), 2200);
+}
+
+function renderDoctors() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filterTerm = filterSelect.value;
+
+  doctorsGrid.innerHTML = "";
+
+  const filteredDoctors = doctors.filter(doc => {
+    const matchName = doc.name.toLowerCase().includes(searchTerm);
+    const matchFilter = filterTerm === "all" || doc.specialization === filterTerm;
+    return matchName && matchFilter;
+  });
+
+  filteredDoctors.forEach(doc => {
+    const card = document.createElement("div");
+    card.className = "bg-white border border-blue-100 rounded-2xl p-6 shadow hover:shadow-lg transition hover:-translate-y-1 relative";
+    card.innerHTML = `
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center font-bold text-xl text-blue-700">${doc.initials}</div>
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900">${doc.name}</h4>
+          <p class="text-sm text-gray-500">${doc.specialization}</p>
+        </div>
+      </div>
+      <p class="text-gray-600 mb-2">${doc.experience} | ${doc.qualification}</p>
+      <p class="text-gray-600 mb-6"><span class="font-medium">Available:</span> ${doc.available}</p>
+      <span class="absolute left-6 bottom-6 text-blue-600 font-bold text-sm">Fee: ${doc.fee} BDT</span>
+      <button class="book-now absolute right-6 bottom-6 bg-blue-700 text-white text-sm font-medium px-4 py-1 rounded-lg hover:bg-blue-600 transition">Book Now</button>
+    `;
+    doctorsGrid.appendChild(card);
+
+    const btn = card.querySelector('.book-now');
+    btn.addEventListener('click', () => openBookingModal(doc));
+  });
+
+  if(filteredDoctors.length === 0){
+    doctorsGrid.innerHTML = `<p class="text-gray-500 col-span-2">No doctors found matching your search/filter.</p>`;
+  }
+}
+
+searchInput.addEventListener("input", renderDoctors);
+filterSelect.addEventListener("change", renderDoctors);
+
+bookingForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const data = {
+    doctorName: doctorNameHidden.value,
+    patientName: patientName.value,
+    patientContact: patientContact.value,
+    apptDay: apptDay.value,
+    reason: reasonInput.value,
+    fee: feeDisplay.textContent
+  };
+
+  const error = validateBooking(data);
+  if(error){
+    bookingError.textContent = error;
+    bookingError.classList.remove('hidden');
+    return;
+  }
+
+  appointments.push(data);
+  closeBookingModal();
+  showToast('Appointment booked successfully');
+  console.log('New appointment:', data);
+});
+
+closeModalBtn.addEventListener('click', closeBookingModal);
+bookingModal.addEventListener('click', (e) => { if(e.target === bookingModal) closeBookingModal(); });
+
+renderDoctors();
+</script>
+
+</body>
+</html>

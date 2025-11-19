@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediLink | Manage Diagnostic Tests</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#E6F3F7] font-['Inter'] text-gray-800">
+
+<div class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="bg-white w-64 p-6 flex flex-col gap-4 border-r border-blue-100">
+    <div class="flex items-center justify-center mb-6">
+      <img src="img/logo3.png" alt="MediLink Logo" class="h-12 w-auto object-contain" />
+    </div>
+
+    <nav class="flex flex-col gap-2">
+      <a href="diagnostic0overview.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Overview</a>
+      <a href="diagnostic1manage.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-100 text-blue-700 font-semibold">Manage Tests</a>
+      <a href="diagnostic2booking.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Test Booking</a>
+      <a href="diagnostic3upload.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Upload Report</a>
+    </nav>
+
+    <div class="mt-auto text-xs text-gray-400 text-center border-t border-blue-50 pt-4">
+      © 2025 MediLink
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 px-10 pt-16 pb-8 relative">
+
+    <!-- 🔹 TOP NAVBAR -->
+    <header class="absolute top-0 right-0 left-0 bg-white px-10 py-4 flex items-center justify-end border-b border-blue-100 shadow-sm">
+      <div class="flex items-center gap-4">
+        <div class="flex flex-col text-right">
+          <span class="font-semibold text-gray-700">Diagnostic Center</span>
+          <span class="text-sm text-gray-500">User</span>
+        </div>
+        <div class="rounded-full bg-blue-200 flex items-center justify-center w-10 h-10 text-blue-700 text-lg font-bold">
+          R
+        </div>
+        <button class="px-4 py-2 border border-blue-700 text-blue-700 rounded hover:bg-blue-50 transition">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Title + Add New Test -->
+    <div class="flex justify-between items-center mb-6 mt-4">
+      <h2 class="text-2xl font-bold text-blue-700">Manage Diagnostic Tests</h2>
+      <button id="addTestBtn" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-600 transition">Add New Test</button>
+    </div>
+
+    <!-- Tests Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="testsGrid">
+
+      <!-- Sample Test Card -->
+      <div class="bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center" data-type="Sample Test">
+        <div>
+          <p class="text-sm text-gray-500">Sample Test</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">CBC</h3>
+          <p class="text-sm text-gray-600 mt-1">Complete Blood Count</p>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+          <span class="text-blue-600 font-bold">Fee: 500 BDT</span>
+          <div class="flex gap-2">
+<div class="flex gap-2">
+  <button class="px-3 py-1 border border-yellow-700 text-yellow-700 rounded hover:bg-yellow-50 transition edit-btn">Edit</button>
+  <button class="px-3 py-1 bg-red-700 text-white border border-red-700 rounded hover:bg-red-800 transition deactivate-btn">Deactivate</button>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Another Sample Test -->
+      <div class="bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center" data-type="Scan Test">
+        <div>
+          <p class="text-sm text-gray-500">Scan Test</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">X-Ray</h3>
+          <p class="text-sm text-gray-600 mt-1">Chest/Bone X-Ray</p>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+          <span class="text-blue-600 font-bold">Fee: 1000 BDT</span>
+          <div class="flex gap-2">
+<div class="flex gap-2">
+  <button class="px-3 py-1 border border-yellow-700 text-yellow-700 rounded hover:bg-yellow-50 transition edit-btn">Edit</button>
+  <button class="px-3 py-1 bg-red-700 text-white border border-red-700 rounded hover:bg-red-800 transition deactivate-btn">Deactivate</button>
+</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- JS for Edit, Deactivate, Add -->
+<script>
+  const testsGrid = document.getElementById('testsGrid');
+  const addTestBtn = document.getElementById('addTestBtn');
+
+  // Edit Test
+  testsGrid.addEventListener('click', (e) => {
+    if(e.target.classList.contains('edit-btn')){
+      const card = e.target.closest('[data-type]');
+      const name = prompt("Edit Test Name:", card.querySelector('h3').innerText);
+      if(name) card.querySelector('h3').innerText = name;
+      const desc = prompt("Edit Description:", card.querySelector('p:nth-of-type(2)').innerText);
+      if(desc) card.querySelector('p:nth-of-type(2)').innerText = desc;
+      const fee = prompt("Edit Fee:", card.querySelector('span').innerText.replace('Fee: ',''));
+      if(fee) card.querySelector('span').innerText = `Fee: ${fee}`;
+    }
+  });
+
+  // Deactivate Test
+  testsGrid.addEventListener('click', (e) => {
+    if(e.target.classList.contains('deactivate-btn')){
+      const card = e.target.closest('[data-type]');
+      if(confirm('Are you sure you want to deactivate this test?')){
+        card.remove();
+      }
+    }
+  });
+
+  // Add New Test
+  addTestBtn.addEventListener('click', () => {
+    const type = prompt("Test Type (Sample Test / Scan Test):", "Sample Test");
+    const name = prompt("Test Name:");
+    const desc = prompt("Test Description:");
+    const fee = prompt("Fee (BDT):");
+    if(type && name && desc && fee){
+      const card = document.createElement('div');
+      card.className = "bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center";
+      card.dataset.type = type;
+      card.innerHTML = `
+        <div>
+          <p class="text-sm text-gray-500">${type}</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">${name}</h3>
+          <p class="text-sm text-gray-600 mt-1">${desc}</p>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+          <span class="text-blue-600 font-bold">Fee: ${fee} BDT</span>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 border border-yellow-700 text-yellow-700 rounded hover:bg-yellow-50 transition edit-btn">Edit</button>
+            <button class="px-3 py-1 border border-red-700 text-red-700 rounded hover:bg-red-50 transition deactivate-btn">Deactivate</button>
+          </div>
+        </div>
+      `;
+      testsGrid.appendChild(card);
+    }
+  });
+</script>
+
+</body>
+</html>

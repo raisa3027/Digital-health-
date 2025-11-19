@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediLink | Health Records</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#E6F3F7] font-['Inter'] text-gray-800">
+
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="bg-white w-64 p-6 flex flex-col gap-4 border-r border-blue-100">
+    <div class="flex items-center justify-center mb-6">
+      <img src="img/logo3.png" alt="MediLink Logo" class="h-12 w-auto object-contain" />
+    </div>
+
+    <nav class="flex flex-col gap-2">
+      <a href="user0dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Profile</a>
+      <a href="user1record.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-100 text-blue-700 font-semibold">Health Records</a>
+      <a href="user2appointment.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Appointments</a>
+      <a href="user3diagnostic.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Diagnostic Tests</a>
+    </nav>
+
+    <div class="mt-auto text-xs text-gray-400 text-center border-t border-blue-50 pt-4">
+      © 2025 MediLink
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+<main class="flex-1 px-10 pt-24 pb-8 relative">
+          <!-- 🔹 TOP NAVBAR (inside main body only) -->
+<header class="absolute top-0 right-0 left-0 bg-white px-10 py-4 flex items-center justify-end border-b border-blue-100 shadow-sm">
+  <!-- Top-right User Info & Logout -->
+  <div class="flex items-center gap-4">
+    <div class="flex flex-col text-right">
+      <span class="font-semibold text-gray-700">Raisa Tasnim</span>
+      <span class="text-sm text-gray-500">User</span>
+    </div>
+    <div class="rounded-full bg-blue-200 flex items-center justify-center w-10 h-10 text-blue-700 text-lg font-bold">
+      R
+    </div>
+    <button class="px-4 py-2 border border-blue-700 text-blue-700 rounded hover:bg-blue-50 transition">
+      Logout
+    </button>
+  </div>
+</header>
+    <!-- Page Title -->
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold text-blue-700">Health Records</h2>
+      <button class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">+ Upload New Record</button>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex gap-4 mb-10">
+      <button class="filter-btn px-4 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold" data-filter="all">Total Records</button>
+      <button class="filter-btn px-4 py-2 bg-white border border-blue-100 text-blue-700 rounded-lg hover:bg-blue-50 transition" data-filter="prescription">Prescription</button>
+      <button class="filter-btn px-4 py-2 bg-white border border-blue-100 text-blue-700 rounded-lg hover:bg-blue-50 transition" data-filter="report">Report</button>
+    </div>
+
+    <!-- Records List -->
+    <div class="flex flex-col gap-6" id="recordsList">
+      <!-- Record Card -->
+      <div class="record-card bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center" data-type="prescription">
+        <div>
+          <p class="text-sm text-gray-500">Prescription</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">General checkup-Fever</h3>
+          <p class="text-xs text-gray-400 mt-1">By: Dr.Tanzidul Islam</p>
+          <p class="text-xs text-gray-400 mt-1">Date: 05-Nov-2025</p>
+        </div>
+        <button class="px-4 py-2 text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-50 transition">View</button>
+      </div>
+
+      <div class="record-card bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center" data-type="report">
+        <div>
+          <p class="text-sm text-gray-500">Report</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">Blood Test Report</h3>
+          <p class="text-xs text-gray-400 mt-1">Date: 01-Nov-2025</p>
+        </div>
+        <button class="px-4 py-2 text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-50 transition">View</button>
+      </div>
+
+      <div class="record-card bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center" data-type="prescription">
+        <div>
+          <p class="text-sm text-gray-500">Prescription</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">General checkup-Cough</h3>
+          <p class="text-xs text-gray-400 mt-1">By: Dr.Sarah Mim</p>
+          <p class="text-xs text-gray-400 mt-1">Date: 20-Oct-2025</p>
+        </div>
+        <button class="px-4 py-2 text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-50 transition">View</button>
+      </div>
+
+      <div class="record-card bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center" data-type="report">
+        <div>
+          <p class="text-sm text-gray-500">Report</p>
+          <h3 class="text-lg font-semibold text-gray-800 mt-1">X-Ray Chest</h3>
+          <p class="text-xs text-gray-400 mt-1">Date: 15-Oct-2025</p>
+        </div>
+        <button class="px-4 py-2 text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-50 transition">View</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- JS for filtering -->
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const records = document.querySelectorAll('.record-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Reset button styles
+      filterButtons.forEach(b => {
+        b.classList.remove('bg-blue-100','text-white','font-semibold');
+        b.classList.add('bg-white','text-blue-700');
+      });
+
+      // Highlight active button
+      btn.classList.remove('bg-white','text-blue-700');
+      btn.classList.add('bg-blue-100','text-blue-700','font-semibold');
+
+      // Show/hide records
+      records.forEach(r => {
+        if(filter === 'all' || r.dataset.type === filter) {
+          r.style.display = 'flex';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

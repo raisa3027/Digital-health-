@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MediLink | Diagnostic Tests</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+</style>
+</head>
+<body class="bg-[#E6F3F7] text-gray-800">
+
+<div class="max-w-7xl mx-auto px-6 py-12">
+
+  <!-- Header -->
+  <h1 class="text-3xl font-bold text-blue-700 mb-6">Diagnostic Tests</h1>
+
+  <!-- Search + Filter -->
+  <div class="flex flex-col md:flex-row gap-4 mb-8">
+    <input id="searchInput" type="text" placeholder="Search test name" 
+      class="flex-1 px-4 py-3 bg-white border border-blue-100 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-300 outline-none"/>
+    <select id="filterSelect" 
+      class="px-4 py-3 bg-white border border-blue-100 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-300 outline-none">
+      <option value="all">All Test Types</option>
+      <option value="Sample Test">Sample Test</option>
+      <option value="Scan Test">Scan Test</option>
+    </select>
+  </div>
+
+  <!-- Tests Grid -->
+  <div id="testsGrid" class="flex flex-col gap-6"></div>
+
+</div>
+
+<script>
+const tests = [
+  { name: "CBC", type: "Sample Test", description: "Complete Blood Count", fee: 500 },
+  { name: "Dengue Test", type: "Sample Test", description: "Dengue Antigen/Antibody Test", fee: 600 },
+  { name: "Typhoid Test", type: "Sample Test", description: "Widal Test for Typhoid", fee: 400 },
+  { name: "Blood Sugar", type: "Sample Test", description: "Fasting & Random Blood Sugar", fee: 300 },
+  { name: "X-Ray", type: "Scan Test", description: "Chest/Bone X-Ray", fee: 1000 },
+  { name: "MRI", type: "Scan Test", description: "Brain/Spine MRI", fee: 5000 },
+  { name: "CT Scan", type: "Scan Test", description: "Head/Chest CT", fee: 4000 },
+  { name: "Ultrasound", type: "Scan Test", description: "Abdominal/Pelvic Ultrasound", fee: 1500 },
+];
+
+const testsGrid = document.getElementById("testsGrid");
+const searchInput = document.getElementById("searchInput");
+const filterSelect = document.getElementById("filterSelect");
+
+function renderTests() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filterTerm = filterSelect.value;
+
+  testsGrid.innerHTML = "";
+
+  const filtered = tests.filter(test => 
+    test.name.toLowerCase().includes(searchTerm) &&
+    (filterTerm === "all" || test.type === filterTerm)
+  );
+
+  filtered.forEach(test => {
+    const card = document.createElement("div");
+    card.className = "bg-white border border-blue-100 rounded-xl p-6 shadow flex justify-between items-center";
+
+    card.innerHTML = `
+      <div>
+        <p class="text-sm text-gray-500">${test.type}</p>
+        <h3 class="text-lg font-semibold text-gray-800 mt-1">${test.name}</h3>
+        <p class="text-sm text-gray-600 mt-1">${test.description}</p>
+      </div>
+      <div class="flex flex-col items-end gap-2">
+        <span class="text-blue-600 font-bold">Fee: ${test.fee} BDT</span>
+        <button class="px-4 py-2 text-white bg-blue-700 rounded-lg hover:bg-blue-600 transition bookBtn">Book Now</button>
+      </div>
+    `;
+    testsGrid.appendChild(card);
+  });
+}
+
+searchInput.addEventListener("input", renderTests);
+filterSelect.addEventListener("change", renderTests);
+
+renderTests();
+</script>
+
+</body>
+</html>

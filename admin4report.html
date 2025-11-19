@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediLink | Manage Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tai+Heritage+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h2 { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+
+<body class="bg-[#E6F3F7] min-h-screen text-gray-800">
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-white w-64 p-6 flex flex-col gap-4 border-r border-blue-100">
+      <div class="flex items-center justify-center mb-6">
+        <img src="img/logo3.png" alt="MediLink Logo" class="h-12 w-auto object-contain" />
+      </div>
+      <nav class="flex flex-col gap-2">
+        <a href="admin0dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Overview</a>
+        <a href="admin1user.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Manage Users</a>
+        <a href="admin2doctor.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Manage Doctors</a>
+        <a href="admin3appoin.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">Appointments</a>
+        <a href="admin4report.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-100 text-blue-700 font-semibold">Reports</a>
+        <a href="admin5sysLog.html" class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-blue-50 hover:text-blue-700 transition">System Logs</a>
+      </nav>
+      <div class="mt-auto text-xs text-gray-400">&copy; 2025 MediLink</div>
+    </aside>
+
+    <!-- ✅ Main Content Area -->
+    <main class="flex-1 px-10 py-8 relative">
+
+      <!-- 🔹 Top Navbar -->
+      <header class="absolute top-0 right-0 left-0 bg-white px-10 py-4 flex items-center justify-end border-b border-blue-100 shadow-sm">
+        <div class="flex items-center gap-4">
+          <div class="flex flex-col text-right">
+            <span class="font-semibold text-gray-700">User Admin</span>
+            <span class="text-sm text-gray-500">Admin</span>
+          </div>
+          <div class="rounded-full bg-blue-200 flex items-center justify-center w-10 h-10 text-blue-700 text-lg font-bold">
+            A
+          </div>
+          <button class="px-4 py-2 border border-blue-700 text-blue-700 rounded hover:bg-blue-50 transition">
+            Logout
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Title -->
+      <h2 class="text-2xl font-bold text-blue-700 mb-6 mt-20">Manage Reports</h2>
+
+      <!-- Table Section -->
+      <div class="bg-white rounded-xl shadow border border-blue-100 p-6 overflow-x-auto">
+        <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-4 gap-3">
+          <input id="searchInput" type="text" placeholder="Search by Patient Name, Email, Test, or Report ID..." class="border border-blue-100 px-3 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-200 text-sm bg-[#E6F3F7] placeholder:text-gray-400" oninput="filterReports()">
+        </div>
+
+        <table class="min-w-full text-left text-[15px]" id="reportTable">
+          <thead class="border-b-2 border-blue-100">
+            <tr>
+              <th class="py-2 pl-2">PATIENT</th>
+              <th class="py-2">EMAIL</th>
+              <th class="py-2">TEST TYPE</th>
+              <th class="py-2">REPORT ID</th>
+              <th class="py-2">UPLOAD DATE</th>
+              <th class="py-2 pr-2">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="reportTableBody">
+            <tr class="border-b border-blue-50 hover:bg-blue-50/60">
+              <td class="py-2 pl-2 font-medium text-gray-700">John Doe</td>
+              <td class="text-sm text-gray-600">john.doe@email.com</td>
+              <td class="text-sm text-gray-700">Blood Test</td>
+              <td class="text-sm text-gray-600">RPT-1001</td>
+              <td class="text-sm text-gray-600">2025-11-04</td>
+              <td class="pr-2 flex gap-2">
+                <button class="px-4 py-1 rounded border-2 border-blue-600 text-blue-700 font-medium hover:bg-blue-50 transition">View</button>
+                <button class="px-4 py-1 rounded bg-red-600 text-white font-medium hover:bg-red-700 transition">Delete</button>
+              </td>
+            </tr>
+            <tr class="border-b border-blue-50 hover:bg-blue-50/60">
+              <td class="py-2 pl-2 font-medium text-gray-700">Emily Davis</td>
+              <td class="text-sm text-gray-600">emily.d@email.com</td>
+              <td class="text-sm text-gray-700">MRI Scan</td>
+              <td class="text-sm text-gray-600">RPT-1002</td>
+              <td class="text-sm text-gray-600">2025-11-03</td>
+              <td class="pr-2 flex gap-2">
+                <button class="px-4 py-1 rounded border-2 border-blue-600 text-blue-700 font-medium hover:bg-blue-50 transition">View</button>
+                <button class="px-4 py-1 rounded bg-red-600 text-white font-medium hover:bg-red-700 transition">Delete</button>
+              </td>
+            </tr>
+            <!-- Add more rows here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function filterReports() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const rows = document.querySelectorAll('#reportTable tbody tr');
+      rows.forEach(row => {
+        const patient = row.querySelectorAll('td')[0].textContent.toLowerCase();
+        const email = row.querySelectorAll('td')[1].textContent.toLowerCase();
+        const test = row.querySelectorAll('td')[2].textContent.toLowerCase();
+        const reportId = row.querySelectorAll('td')[3].textContent.toLowerCase();
+        row.style.display = (patient.includes(input) || email.includes(input) || test.includes(input) || reportId.includes(input)) ? '' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
